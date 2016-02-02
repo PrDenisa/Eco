@@ -2,26 +2,29 @@
 /**
  * Created by PhpStorm.
  * User: denisa
- * Date: 01.02.2016
- * Time: 15:53
+ * Date: 02.02.2016
+ * Time: 16:45
  */
 
 namespace AppBundle\Controller;
 
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class EcoController extends Controller
+/**
+ * Class AdminController
+ *
+ * @Route("/admin")
+ */
+class AdminController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
-     * @Method("GET")
+     * @Route("/", name="adminHomepage")
      */
     public function indexAction(Request $request)
     {
-        return $this->render('eco/index.html.twig');
+        return $this->render('admin/index.html.twig');
     }
 }

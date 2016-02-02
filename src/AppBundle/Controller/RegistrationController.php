@@ -1,5 +1,4 @@
 <?php
-// src/AppBundle/Controller/RegistrationController.php
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +17,8 @@ class RegistrationController extends Controller
     {
         // 1) build the form
         $user = new User();
+        $user->setIsActive(true);
+        $user->setIsAdmin(false);
         $form = $this->createForm(UserType::class, $user);
 
         // 2) handle the submit (will only happen on POST)
@@ -36,7 +37,7 @@ class RegistrationController extends Controller
             // ... do any other work - like send them an email, etc
             // maybe set a "flash" success message for the user
 
-            return $this->redirectToRoute('eco/index.html.twig');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render(

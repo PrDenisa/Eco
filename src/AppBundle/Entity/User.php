@@ -51,6 +51,11 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\Column(name="is_admin", type="boolean")
+     */
+    private $isAdmin;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -97,6 +102,10 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function getRoles()
     {
+        if ($this->isAdmin == true)
+        {
+            return array('ROLE_ADMIN');
+        }
         return array('ROLE_USER');
     }
 
@@ -112,6 +121,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->username,
             $this->password,
             $this->isActive,
+            $this->isAdmin,
             // see section on salt below
             // $this->salt,
         ));
@@ -125,6 +135,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->username,
             $this->password,
             $this->isActive,
+            $this->isAdmin,
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized);
@@ -226,4 +237,27 @@ class User implements AdvancedUserInterface, \Serializable
         $this->plainPassword = $password;
     }
 
+    /**
+     * Set isAdmin
+     *
+     * @param boolean $isAdmin
+     *
+     * @return User
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
+
+    /**
+     * Get isAdmin
+     *
+     * @return boolean
+     */
+    public function getIsAdmin()
+    {
+        return $this->isAdmin;
+    }
 }
