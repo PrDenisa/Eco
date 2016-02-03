@@ -7,6 +7,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    bootstrap-css: "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css"
 
 framework:
     #esi:             ~
@@ -34,6 +35,9 @@ framework:
     assets: ~
 
 assetic:
+    assets:
+        bootstrap-css:
+            inputs: '%bootstrap-css%'
     debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
     filters:
@@ -41,8 +45,11 @@ assetic:
 
 # Twig Configuration
 twig:
+#    form:
+#        resources: ['bootstrap_3_layout.html.twig']
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+
 
 # Doctrine Configuration
 doctrine:
