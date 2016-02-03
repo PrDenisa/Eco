@@ -4,4 +4,35 @@
 
 {% block body %}
     <h1>Hello Admin!!!</h1>
+    <div class="container">
+        <div class="row">
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Is Active</th>
+                    <th>Is Admin</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{% if user.isActive == true %}Active{% else %}Deactivated{% endif %}</td>
+                            <td>{% if user.isAdmin == true %}Admin{% else %}User{% endif %}</td>
+                            <td>
+                                <a href="{{ path('user-edit', {'id': user.id}) }}">Edit!</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}
