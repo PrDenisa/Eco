@@ -16,8 +16,9 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block loging %}
+        {% block navbar %}
             {% if app.user.isAdmin is defined %}
+                <a href="{{ path('products_index') }}">Products</a>
                 {% if app.user.isAdmin == true %}
                     {% if app.request.pathInfo != "/admin/" %}
                         <a href="{{ path('adminHomepage') }}">Admin page!</a>

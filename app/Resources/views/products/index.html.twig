@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1>Products list</h1>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Available Stock</th>
+                        <th>Total Stock</th>
+                        <th>Price</th>
+                        <th>Vat(%)</th>
+                        <th>Is Active</th>
+                        <th>Total Value</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% set total = 0 %}
+                {% for product in products %}
+                    <tr>
+                        <td><a href="{{ path('products_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.stockAvailable }}</td>
+                        <td>{{ product.totalStock }}</td>
+                        <td>{{ product.price }} RON</td>
+                        <td>{{ product.vat }}%</td>
+                        <td>{% if product.isActive %}Yes{% else %}No{% endif %}</td>
+                        <td>{{ product.totalStock * product.price }} RON{% set total = total + product.totalStock * product.price %}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('products_show', { 'id': product.id }) }}">show</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('products_edit', { 'id': product.id }) }}">edit</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                    <tr>
+                        <td colspan="6"><h2>Total Amount: </h2></td>
+                        <td colspan="3"><h2>{{ total }} RON </h2></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul>
+                <li>
+                    <a href="{{ path('products_new') }}">Create a new entry</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
