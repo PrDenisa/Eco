@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Payments</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ payment.id }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ payment.number }}</td>
+            </tr>
+            <tr>
+                <th>Explanation</th>
+                <td>{{ payment.explanation }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ payment.amount }}</td>
+            </tr>
+            <tr>
+                <th>Datetime</th>
+                <td>{% if payment.datetime %}{{ payment.datetime|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('payments_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('payments_edit', { 'id': payment.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

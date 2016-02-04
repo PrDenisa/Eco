@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Incomes list</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Number</th>
+                <th>Explanation</th>
+                <th>Amount</th>
+                <th>Datetime</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for income in incomes %}
+            <tr>
+                <td><a href="{{ path('incomes_show', { 'id': income.id }) }}">{{ income.id }}</a></td>
+                <td>{{ income.number }}</td>
+                <td>{{ income.explanation }}</td>
+                <td>{{ income.amount }}</td>
+                <td>{% if income.datetime %}{{ income.datetime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('incomes_show', { 'id': income.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('incomes_edit', { 'id': income.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('incomes_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
